@@ -1,11 +1,14 @@
-<div>
+<div class="header-actions">
     <div class="page-numbering">
         <span>Page Number:</span>&nbsp;&nbsp;
         <nz-select [(ngModel)]="selectedPageNumber" style="width: 100px;">
             <nz-option *ngFor="let item of numberingPage" [nzValue]="item" [nzLabel]="item"></nz-option>
         </nz-select>&nbsp;&nbsp;
-        <input nz-input placeholder="Search..." [(ngModel)]="searchValue" style="width: 500px;" />&nbsp;&nbsp;
+        <input nz-input placeholder="Search Employees..." [(ngModel)]="searchValue" style="width: 500px;" />&nbsp;&nbsp;
         <button nz-button nzType="primary">Filter</button>
+    </div>
+    <div>
+        <button nz-button nzType="primary">Add Employee</button>
     </div>
 </div>
 <br />
