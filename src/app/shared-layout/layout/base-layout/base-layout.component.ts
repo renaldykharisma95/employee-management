@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
 
 @Component({
   selector: 'app-base-layout',
@@ -7,11 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseLayoutComponent implements OnInit {
   
-  isCollapsed:boolean = false;
+  isCollapsed: boolean = false;
+  menuTitle: string = '';
+  breadCrumbData = [];
 
-  constructor() { }
+  constructor(
+    private observerService: ObserversServiceService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit(){
+    this.observerService.titlePage.subscribe(name => {
+      this.menuTitle = name;
+    });
+    this.observerService.breadCrumb.subscribe(breadcrumb => {
+      this.breadCrumbData = breadcrumb;
+    });
+    this.cdr.detectChanges();
   }
 
 }

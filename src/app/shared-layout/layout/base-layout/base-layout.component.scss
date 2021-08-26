@@ -26,13 +26,18 @@
   }
 
   nz-breadcrumb {
-    margin: 16px 0;
+    margin: 16px 16px;
   }
 
   .inner-content {
     padding: 24px;
     background: #fff;
     min-height: 100vh;
+  }
+
+  .menu-title{
+    font-size: 32px;
+    margin: 16px 16px;
   }
 
   nz-footer {
