@@ -4,8 +4,13 @@
         <h2 style="text-align: center;">Employee Management</h2>
       </nz-header>
       <nz-content>
-        <nz-breadcrumb>
-          <!-- <nz-breadcrumb-item>User</nz-breadcrumb-item> -->
+        <h2 class="menu-title">{{menuTitle}}</h2>
+        <nz-breadcrumb style="font-size: 18px;">
+          <nz-breadcrumb-item *ngFor="let item of breadCrumbData">
+            <a *ngIf="item.link !== ''" [routerLink]="item.link" routerLinkActive="router-link-active">{{ item.name }}</a>
+            <span *ngIf="breadCrumbData.length === 1" >/&nbsp;</span>
+            <span *ngIf="item.link === ''">{{ item.name }}</span>
+          </nz-breadcrumb-item>
         </nz-breadcrumb>
         <nz-content class="inner-content">
           <router-outlet></router-outlet>
