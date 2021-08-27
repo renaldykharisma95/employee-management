@@ -5,6 +5,7 @@ import { BaseLayoutComponent } from './shared-layout/layout/base-layout/base-lay
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     loadChildren: () => import('../app/login/login.module').then(m=>m.LoginModule)
   },
   {
@@ -21,7 +22,7 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./shared-layout/layout/layout.module').then(m => m.LayoutModule)
   },
-  { path: '**', redirectTo: '' }
+  // { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
