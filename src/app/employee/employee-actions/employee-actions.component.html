@@ -1,1 +1,74 @@
-<p>employee-actions works!</p>
+<form nz-form [formGroup]="employeeForm">
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Username</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid username!">
+          <input nz-input formControlName="username" placeholder="Please Fill Username" class="form-input" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Firstname</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid firtname!">
+          <input nz-input formControlName="firstname" placeholder="Please Fill Firtname" class="form-input" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Lastname</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid lastname!">
+          <input nz-input formControlName="lastname" placeholder="Please Fill Lastname" class="form-input" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">email</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid email!">
+          <input nz-input formControlName="email" placeholder="Please Fill Email" class="form-input" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Birth Date</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid birth date!">
+            <nz-date-picker formControlName="birthdate"></nz-date-picker>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Basic Salary</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid basic salary!">
+          <input nz-input formControlName="basicSalary" placeholder="Please Fill Basic Salary" class="form-input" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Status</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid status!">
+          <input nz-input formControlName="status" placeholder="Please Fill Status" class="form-input" />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Group</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid group!">
+          <nz-select
+            formControlName="group"
+            nzPlaceHolder="Please select"
+          >
+            <nz-option *ngFor="let item of listOfGroup" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+          </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Description</nz-form-label>
+        <nz-form-label [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
+        <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid description!">
+            <nz-date-picker formControlName="description"></nz-date-picker>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<div class="button-submit">
+    <button nz-button nzType="danger" (click)="submitData(2)" class="btn-cancel">Cancel</button>&nbsp;
+    <button nz-button nzType="primary" (click)="submitData(1)" class="btn-submit">Submit</button>
+</div>
