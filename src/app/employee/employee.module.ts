@@ -5,7 +5,7 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeActionsComponent } from './employee-actions/employee-actions.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     EmployeeRoutingModule,
     NgZorroAntdModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

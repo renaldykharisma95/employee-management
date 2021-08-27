@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./shared-layout/layout/layout.module').then(m => m.LayoutModule)
   },
-  // { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
