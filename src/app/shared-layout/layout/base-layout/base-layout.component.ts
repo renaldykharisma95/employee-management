@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
 
 @Component({
@@ -10,14 +11,16 @@ export class BaseLayoutComponent implements OnInit {
   
   isCollapsed: boolean = false;
   menuTitle: string = '';
-  breadCrumbData = [];
+  breadCrumbData:any [] = [];
 
   constructor(
     private observerService: ObserversServiceService,
     private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.breadCrumbData = [];
+  }
 
   ngAfterViewInit(){
     this.observerService.titlePage.subscribe(name => {
@@ -26,7 +29,9 @@ export class BaseLayoutComponent implements OnInit {
     this.observerService.breadCrumb.subscribe(breadcrumb => {
       this.breadCrumbData = breadcrumb;
     });
-    this.cdr.detectChanges();
   }
 
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
+  }
 }
