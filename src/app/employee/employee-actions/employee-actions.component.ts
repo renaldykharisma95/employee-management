@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
-import { employeeCreateRoute, employeeEditRoute, groupList, pageNumbering } from 'src/app/utils/shared-datas';
+import { CURRENCY_MASK_IDR, employeeCreateRoute, employeeEditRoute, groupList, pageNumbering } from 'src/app/utils/shared-datas';
 import { StorageService } from 'src/app/utils/storages/storage.service';
 
 @Component({
@@ -18,12 +19,16 @@ export class EmployeeActionsComponent implements OnInit {
   dataEmployee: any;
   listOfGroup = groupList;
   public idEmployee = Guid;
+  currencyMask = CURRENCY_MASK_IDR;
+  amount: any;
+  innerWidth: any;
 
   constructor(
     private observerService: ObserversServiceService,
     private fb: FormBuilder,
     private route: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private currencyPipe : CurrencyPipe
   ) { }
 
   ngOnInit() {
@@ -35,6 +40,12 @@ export class EmployeeActionsComponent implements OnInit {
     if(this.dataEmployee){
       this.setDataToForm(this.dataEmployee);
     }
+    this.innerWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
   }
 
   setForm(){
@@ -57,7 +68,7 @@ export class EmployeeActionsComponent implements OnInit {
     this.employeeForm.get('lastname').setValue(data.lastname);
     this.employeeForm.get('email').setValue(data.email);
     this.employeeForm.get('birthdate').setValue(data.birthdate);
-    this.employeeForm.get('basicSalary').setValue(data.basicSalary);
+    this.employeeForm.get('basicSalary').setValue(this.currencyPipe.transform(this.employeeForm.value.basicSalary, 'Rp '), data.basicSalary);
     this.employeeForm.get('status').setValue(data.status);
     this.employeeForm.get('group').setValue(data.group);
     this.employeeForm.get('description').setValue(data.description);
@@ -90,5 +101,10 @@ export class EmployeeActionsComponent implements OnInit {
         break;
       }
     }
+  }
+
+  transformAmount(element: any){
+    this.employeeForm.value.basicSalary = this.currencyPipe.transform(this.employeeForm.value.basicSalary, 'Rp ');
+    element.target.value = this.employeeForm.value.basicSalary;
   }
 }
