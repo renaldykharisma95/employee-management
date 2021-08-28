@@ -1,8 +1,12 @@
+<nz-modal [(nzVisible)]="isLogOut" nzWrapClassName="vertical-center-modal" 
+nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <h2 class="confirmWording">{{nameUser}}, Are You Sure Want to Delete?</h2>
+</nz-modal>
 <nz-layout>
     <nz-layout>
       <nz-header >
-        <h2 style="color: white;">Employee Management</h2>
-        <button nz-button nzType="default">
+        <h2 class="header-title">Employee Management Web Application</h2>
+        <button nz-button nzType="default" (click)="signOut()">
           <i nz-icon nzType="logout" nzTheme="outline"></i>
           Logout
         </button>
