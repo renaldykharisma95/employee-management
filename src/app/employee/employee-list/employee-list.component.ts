@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
-import { CURRENCY_MASK_IDR, employeeAttribute, employeeListRoute, pageNumbering } from 'src/app/utils/shared-datas';
+import { employeeAttribute, employeeListRoute, pageNumbering } from 'src/app/utils/shared-datas';
 import { StorageService } from 'src/app/utils/storages/storage.service';
 
 @Component({

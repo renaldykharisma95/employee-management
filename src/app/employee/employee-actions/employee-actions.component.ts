@@ -28,7 +28,6 @@ export class EmployeeActionsComponent implements OnInit {
     private fb: FormBuilder,
     private route: Router,
     private storageService: StorageService,
-    private currencyPipe : CurrencyPipe
   ) { }
 
   ngOnInit() {
@@ -88,7 +87,7 @@ export class EmployeeActionsComponent implements OnInit {
       case 1:{
         this.submitForm();
         if(this.employeeForm.valid){
-          this.observerService.setEmployeeData({id: this.dataEmployee ? this.dataEmployee.id :String(Guid.create()), ...this.employeeForm.value} , 
+          this.observerService.setEmployeeData({id: this.dataEmployee ? this.dataEmployee.id :String(Guid.create()), ...this.employeeForm.value}, 
           !this.dataEmployee ? 0 : 1);
           this.storageService.clearStorage(0);
           this.route.navigate(['/employee-list']);

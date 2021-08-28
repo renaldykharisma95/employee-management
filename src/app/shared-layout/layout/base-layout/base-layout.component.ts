@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
 import { StorageService } from 'src/app/utils/storages/storage.service';
 
