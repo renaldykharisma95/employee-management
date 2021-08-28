@@ -59,6 +59,7 @@ export class BaseLayoutComponent implements OnInit {
   }
   
   handleOk(){
+    this.observerService.setEmployeeData([], 4);
     this.localStorageService.clearStorage(1);
     this.route.navigate(['']);
     this.isLogOut = false;

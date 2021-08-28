@@ -47,6 +47,11 @@ export class ObserversServiceService {
         this.employeedatas.next(this.arrCollectData);
         break;
       }
+      case 4:{
+        this.arrCollectData = [];
+        this.employeedatas.next(this.arrCollectData);
+        break;
+      }
     }
     
   }
