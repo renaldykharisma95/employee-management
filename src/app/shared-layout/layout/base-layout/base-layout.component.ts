@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
@@ -16,6 +16,7 @@ export class BaseLayoutComponent implements OnInit {
   breadCrumbData:any [] = [];
   nameUser: '';
   isLogOut: boolean = false;
+  innerWidth: any;
 
   constructor(
     private observerService: ObserversServiceService,
@@ -27,7 +28,14 @@ export class BaseLayoutComponent implements OnInit {
   ngOnInit() {
     this.nameUser = JSON.parse(this.localStorageService.getDataStorage('USER_DATA')).userName;
     this.breadCrumbData = [];
+    this.innerWidth = window.innerWidth;
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
+
 
   ngAfterViewInit(){
     this.observerService.titlePage.subscribe(name => {

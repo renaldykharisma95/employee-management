@@ -5,7 +5,7 @@ nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="ha
 <nz-layout>
     <nz-layout>
       <nz-header >
-        <h2 class="header-title">Employee Management Web Application</h2>
+        <h2 class="header-title">Employee Management {{innerWidth < 600 ? '' : 'Web Application'}}</h2>
         <button nz-button nzType="default" (click)="signOut()">
           <i nz-icon nzType="logout" nzTheme="outline"></i>
           Logout
