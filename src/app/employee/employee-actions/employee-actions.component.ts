@@ -68,7 +68,7 @@ export class EmployeeActionsComponent implements OnInit {
     this.employeeForm.get('lastname').setValue(data.lastname);
     this.employeeForm.get('email').setValue(data.email);
     this.employeeForm.get('birthdate').setValue(data.birthdate);
-    this.employeeForm.get('basicSalary').setValue(this.currencyPipe.transform(this.employeeForm.value.basicSalary, 'Rp '), data.basicSalary);
+    this.employeeForm.get('basicSalary').setValue(this.currencyPipe.transform(this.dataEmployee.basicSalary, 'Rp '), data.basicSalary);
     this.employeeForm.get('status').setValue(data.status);
     this.employeeForm.get('group').setValue(data.group);
     this.employeeForm.get('description').setValue(data.description);
