@@ -71,3 +71,32 @@ export const groupList = [
         name: 'group 10'
     }
 ];
+
+export const employeeAttribute=[
+    {
+        id: '1',
+        name: 'Status'
+    },
+    {
+        id: '2',
+        name: 'Username'
+    },
+    {
+        id: '3',
+        name: 'First Name'
+    },
+    {
+        id: '4',
+        name: 'Last Name'
+    },
+    {
+        id: '5',
+        name: 'Email'
+    },
+    {
+        id: '6',
+        name: 'Group'
+    }
+];
+
+export const CURRENCY_MASK_IDR = { prefix: 'Rp ', thousands: '.', decimal: ',', precision: 0 };
