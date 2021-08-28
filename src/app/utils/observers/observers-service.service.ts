@@ -42,6 +42,11 @@ export class ObserversServiceService {
         this.employeedatas.next(this.arrCollectData);
         break;
       }
+      case 2:{
+        this.arrCollectData = this.arrCollectData.filter(x=>x.id !== data.id);
+        this.employeedatas.next(this.arrCollectData);
+        break;
+      }
     }
     
   }
