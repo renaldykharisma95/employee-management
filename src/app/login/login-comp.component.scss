@@ -1,13 +1,10 @@
-.card{
-    width: 500px;
-}
-
 .label{
     text-align: left;
 }
 
 .background{
-    height: 10em;
+    height: 100vh;
+    background-color: #1c3d5c;
 }
 
 .background .card{
@@ -17,4 +14,10 @@
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
+}
+
+@media screen and (max-width: 600px){
+    .card{
+        width: 80%;
+    }
 }

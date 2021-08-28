@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Navigation, Router } from '@angular/router';
+import { StorageService } from '../utils/storages/storage.service';
 
 @Component({
   selector: 'app-login-comp',
@@ -10,12 +11,22 @@ import { Navigation, Router } from '@angular/router';
 export class LoginCompComponent implements OnInit {
 
   loginForm: FormGroup;
+  innerWidth: any;
 
-  constructor(private fb: FormBuilder,
-    private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private storageService: StorageService
+    ) { }
 
   ngOnInit() {
     this.setForm();
+    this.innerWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
   }
 
   setForm(){
@@ -25,8 +36,21 @@ export class LoginCompComponent implements OnInit {
     })
   }
 
+  submitForm(): void {
+    for (const i in this.loginForm.controls) {
+      if (this.loginForm.controls.hasOwnProperty(i)) {
+        this.loginForm.controls[i].markAsDirty();
+        this.loginForm.controls[i].updateValueAndValidity();
+      }
+    }
+  }
+
   loginSubmit(){
-    this.router.navigate(['/employee-list']);
+    this.submitForm();
+    if(this.loginForm.valid){
+      this.storageService.setStorageData({...this.loginForm.value}, 0)
+      this.router.navigate(['/employee-list']);
+    }
   }
 
 }

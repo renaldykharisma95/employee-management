@@ -1,25 +1,25 @@
 <div class="background">
     <nz-card class="card">
+        <h2 style="text-align: center;">Employee Management Web Application</h2>
         <div class="card-form">
             <form nz-form [formGroup]="loginForm">
                 <nz-form-item>
-                    <nz-form-label class="label" [nzSm]="4" [nzXs]="22" nzRequired nzFor="username" nzNoColon="true">Username</nz-form-label>
-                    <nz-form-label [nzSm]="1" [nzXs]="1"  nzNoColon="true">:</nz-form-label>
-                    <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="Please input your username!">
+                    <nz-form-label class="label" [nzSm]="6" [nzXs]="2" nzRequired nzFor="username" nzNoColon="true">Username</nz-form-label>
+                    <nz-form-label *ngIf="innerWidth > 600" [nzSm]="1" [nzXs]="1"  nzNoColon="true">:</nz-form-label>
+                    <nz-form-control [nzSm]="17" [nzXs]="8" nzErrorTip="Please input your username!">
                         <input formControlName="userName" nz-input placeholder="Username" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-label class="label" [nzSm]="4" [nzXs]="22" nzRequired nzFor="password" nzNoColon="true">Password</nz-form-label>
-                    <nz-form-label [nzSm]="1" [nzXs]="1"  nzNoColon="true">:</nz-form-label>
-                    <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="Please input your password!">
-                        <input formControlName="password" nz-input placeholder="Password" />
+                    <nz-form-label class="label" [nzSm]="6" [nzXs]="2" nzRequired nzFor="password" nzNoColon="true">Password</nz-form-label>
+                    <nz-form-label *ngIf="innerWidth > 600" [nzSm]="1" [nzXs]="1"  nzNoColon="true">:</nz-form-label>
+                    <nz-form-control [nzSm]="17" [nzXs]="8" nzErrorTip="Please input your password!">
+                        <input type="password" formControlName="password" nz-input placeholder="Password" />
                     </nz-form-control>
                 </nz-form-item>
-                <br />
                 <nz-form-item nz-row>
-                    <nz-form-control [nzSpan]="14" [nzOffset]="5">
-                        <button nz-button nzType="primary" (click)="loginSubmit()">Login</button>
+                    <nz-form-control nz-col [nzSm]="{span: 17, offset: 7}" [nzXs]="{span: 24, offset: 0}">
+                        <button nz-button nzType="primary" (click)="loginSubmit()" nzBlock>Login</button>
                     </nz-form-control>
                 </nz-form-item>
             </form>
