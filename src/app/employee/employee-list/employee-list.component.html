@@ -3,26 +3,6 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
     <h2 style="text-align: center;">Are You Sure Want to Delete?</h2>
 </nz-modal>
 
-<div class="header-actions" *ngIf="innerWidth > 600">
-    <div class="page-numbering">
-        <div style="display: flex; align-items: center;">
-            <span>Page Size:</span>&nbsp;&nbsp;
-            <nz-select [(ngModel)]="selectedPageNumber" (ngModelChange)="onPageNumberChange($event)" style="width: 100px;">
-                <nz-option *ngFor="let item of numberingPage" [nzValue]="item" [nzLabel]="item"></nz-option>
-            </nz-select>&nbsp;&nbsp;
-        </div>
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-            <input nz-input placeholder="Search Employees..." [(ngModel)]="searchValue" style="width: 500px;" />
-        </nz-input-group>
-        <ng-template #addOnBeforeTemplate>
-            <nz-select style="width: 100px;" [(ngModel)]="selectSearch">
-              <nz-option *ngFor="let item of listOfSearchAttribut" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-            </nz-select>
-          </ng-template>
-        <button nz-button nzType="primary" (click)="searchEmployee()">Search</button>
-    </div>
-    <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
-</div>
 <div *ngIf="innerWidth < 600">
     <div style="display: flex; align-items: center; justify-content: space-between;">
         <div style="display: flex; align-items: center;">
@@ -43,6 +23,26 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
         </nz-select>
     </ng-template>
     <button nz-button nzType="primary" style="margin-top: 6px;" (click)="searchEmployee()" nzBlock>Search</button>
+</div>
+<div class="header-actions" *ngIf="innerWidth > 600">
+    <div class="page-numbering">
+        <div style="display: flex; align-items: center;">
+            <span>Page Size:</span>&nbsp;&nbsp;
+            <nz-select [(ngModel)]="selectedPageNumber" (ngModelChange)="onPageNumberChange($event)" style="width: 100px;">
+                <nz-option *ngFor="let item of numberingPage" [nzValue]="item" [nzLabel]="item"></nz-option>
+            </nz-select>&nbsp;&nbsp;
+        </div>
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+            <input nz-input placeholder="Search Employees..." [(ngModel)]="searchValue" style="width: 500px;" />
+        </nz-input-group>
+        <ng-template #addOnBeforeTemplate>
+            <nz-select style="width: 100px;" [(ngModel)]="selectSearch">
+              <nz-option *ngFor="let item of listOfSearchAttribut" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+            </nz-select>
+          </ng-template>
+        <button nz-button nzType="primary" (click)="searchEmployee()">Search</button>
+    </div>
+    <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
 </div>
 <br />
 <nz-table #employeeTable [nzData]="listOfEmployee" 
