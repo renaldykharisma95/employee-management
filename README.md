@@ -20,5 +20,5 @@ live demo link: https://employeemanagementwebapp.netlify.app/
 ![alt text](https://i.ibb.co/3SzCtxj/Screen-Shot-2021-08-28-at-20-34-57.png)<br />
 5. Untuk menghapus data employee, pengguna dapat menekan tombol merah pada di tabel data employee pada halaman 'Employee List'. Setelah pengguna menekan tombol merah tersebut, pengguna akan ditampilkan alert konfirmasi untuk melanjutkan proses menghapus data atau tidak. Jika iya maka, data employee pada tabel akan terhapus.
 
-![alt text](https://i.ibb.co/QcCK7DS/Screen-Shot-2021-08-28-at-20-37-54.png)<br />
+![alt text](https://i.ibb.co/b21fvcP/Screen-Shot-2021-08-29-at-05-25-39.png)<br />
 6. Untuk keluar dari aplikasi. Pengguna dapat menekan tombol 'logout' di pojok atas sebelah kanan. Setelah pengguna menekan tombol 'logout', pengguna akan ditampilkan alert konfirmasi untuk melanjutkan proses logout atau tidak. Jika iya maka, pengguna akan diarahkan ke halaman login kembali.
