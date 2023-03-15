@@ -31,6 +31,6 @@ export class CookiesService {
   }
 
   deleteCookie() {
-      this.setCookie('', -1)
+    this.setCookie('', -1)
   }
 }

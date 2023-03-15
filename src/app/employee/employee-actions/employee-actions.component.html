@@ -10,7 +10,7 @@
         <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Firstname</nz-form-label>
         <nz-form-label *ngIf="innerWidth > 600" [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
         <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid firtname!">
-          <input nz-input formControlName="firstname" placeholder="Please Fill Firtname" class="form-input" />
+          <input nz-input formControlName="firstname" placeholder="Please Fill Firstname" class="form-input" />
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -38,7 +38,7 @@
         <nz-form-label [nzSm]="2" [nzXs]="24" class="label" nzRequired nzFor="email" nzNoColon="true">Basic Salary</nz-form-label>
         <nz-form-label *ngIf="innerWidth > 600" [nzSm]="3" [nzXs]="24" nzNoColon="true">:</nz-form-label>
         <nz-form-control [nzSm]="19" [nzXs]="24" nzErrorTip="The input is not valid basic salary!">
-          <input nz-input currencyMask formControlName="basicSalary" placeholder="Please Fill Basic Salary" class="form-input" 
+          <input nz-input currencyMask formControlName="basicSalary" placeholder="Please Fill Basic Salary" class="form-input"
           [options]="currencyMask" />
         </nz-form-control>
     </nz-form-item>

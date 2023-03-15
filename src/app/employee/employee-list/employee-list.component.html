@@ -1,8 +1,28 @@
-<nz-modal [(nzVisible)]="isDeleteEmp" nzWrapClassName="vertical-center-modal" 
+<nz-modal [(nzVisible)]="isDeleteEmp" nzWrapClassName="vertical-center-modal"
 nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <h2 style="text-align: center;">Are You Sure Want to Delete?</h2>
 </nz-modal>
-<div *ngIf="innerWidth < 600">
+<div class="header-actions" *ngIf="!isMobile">
+  <div class="page-numbering">
+      <div style="display: flex; align-items: center;">
+          <span>Page Size:</span>&nbsp;&nbsp;
+          <nz-select [(ngModel)]="selectedPageNumber" (ngModelChange)="onPageNumberChange($event)" style="width: 100px;">
+              <nz-option *ngFor="let item of numberingPage" [nzValue]="item" [nzLabel]="item"></nz-option>
+          </nz-select>&nbsp;&nbsp;
+      </div>
+      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+          <input nz-input placeholder="Search Employees..." [(ngModel)]="searchValue" style="width: 500px;" />
+      </nz-input-group>
+      <ng-template #addOnBeforeTemplate>
+          <nz-select style="width: 100px;" [(ngModel)]="selectSearch">
+            <nz-option *ngFor="let item of listOfSearchAttribut" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+          </nz-select>
+        </ng-template>
+      <button nz-button nzType="primary" (click)="searchEmployee()">Search</button>
+  </div>
+  <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
+</div>
+<div *ngIf="isMobile">
     <div style="display: flex; align-items: center; justify-content: space-between;">
         <div style="display: flex; align-items: center;">
             <span>Page Size:</span>&nbsp;&nbsp;
@@ -23,56 +43,75 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
     </ng-template>
     <button nz-button nzType="primary" style="margin-top: 6px;" (click)="searchEmployee()" nzBlock>Search</button>
 </div>
-<div class="header-actions" *ngIf="innerWidth > 600">
-    <div class="page-numbering">
-        <div style="display: flex; align-items: center;">
-            <span>Page Size:</span>&nbsp;&nbsp;
-            <nz-select [(ngModel)]="selectedPageNumber" (ngModelChange)="onPageNumberChange($event)" style="width: 100px;">
-                <nz-option *ngFor="let item of numberingPage" [nzValue]="item" [nzLabel]="item"></nz-option>
-            </nz-select>&nbsp;&nbsp;
-        </div>
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-            <input nz-input placeholder="Search Employees..." [(ngModel)]="searchValue" style="width: 500px;" />
-        </nz-input-group>
-        <ng-template #addOnBeforeTemplate>
-            <nz-select style="width: 100px;" [(ngModel)]="selectSearch">
-              <nz-option *ngFor="let item of listOfSearchAttribut" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-            </nz-select>
-          </ng-template>
-        <button nz-button nzType="primary" (click)="searchEmployee()">Search</button>
-    </div>
-    <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
-</div>
 <br />
-<nz-table #employeeTable [nzData]="listOfEmployee" 
-[nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="listOfEmployee.length" [nzScroll]="{x: '1200px'}">
-    <thead (nzSortChange)="sort($event)" nzSingleSort>
-        <tr>
-            <th nzAlign="center">No</th>
-            <th nzAlign="center" >Actions</th>
-            <th>Status</th>
-            <th nzShowSort nzSortKey="username">Username</th>
-            <th nzShowSort nzSortKey="firstname">First Name</th>
-            <th nzShowSort nzSortKey="lastname">Last Name</th>
-            <th>Email</th>
-            <th>Group</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of employeeTable.data; index as i">
-            <td nzAlign="center">{{data?.numbering}}</td>
-            <td nzAlign="center" nzWidth="200px">
-                <button nz-button nzType="primary" style="background-color: rgb(255, 238, 0); color: black;" (click)="actionClick(data)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>&nbsp;
-                <button nz-button nzType="danger" (click)="delete(data)"><i nz-icon nzType="delete" nzTheme="outline"></i></button>
-            </td>
-            <td>{{ data?.status }}</td>
-            <td>{{ data?.username }}</td>
-            <td>{{ data?.firstname }}</td>
-            <td>{{ data?.lastname }}</td>
-            <td>{{ data?.email }}</td>
-            <td>{{ data?.group }}</td>
-            <td>{{ data?.description | date: "fullDate" }}</td>
-        </tr>
-    </tbody>
-</nz-table>
+<div *ngIf="!isMobile">
+  <nz-table #employeeTable [nzData]="listOfEmployee"
+  [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="listOfEmployee.length" [nzScroll]="{x: '1200px'}">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+              <th nzAlign="center">No</th>
+              <th nzAlign="center" >Actions</th>
+              <th>Status</th>
+              <th nzShowSort nzSortKey="username">Username</th>
+              <th nzShowSort nzSortKey="firstname">First Name</th>
+              <th nzShowSort nzSortKey="lastname">Last Name</th>
+              <th>Email</th>
+              <th>Group</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of employeeTable.data; index as i">
+              <td nzAlign="center">{{data?.numbering}}</td>
+              <td nzAlign="center" nzWidth="200px">
+                  <button nz-button nzType="primary" style="background-color: rgb(255, 238, 0); color: black;" (click)="actionClick(data)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>&nbsp;
+                  <button nz-button nzType="danger" (click)="delete(data)"><i nz-icon nzType="delete" nzTheme="outline"></i></button>
+              </td>
+              <td>{{ data?.status }}</td>
+              <td>{{ data?.username }}</td>
+              <td>{{ data?.firstname }}</td>
+              <td>{{ data?.lastname }}</td>
+              <td>{{ data?.email }}</td>
+              <td>{{ data?.group }}</td>
+              <td>{{ data?.description | date: "fullDate" }}</td>
+          </tr>
+      </tbody>
+  </nz-table>
+</div>
+<div *ngIf="isMobile">
+  <nz-list
+    [nzDataSource]="listOfEmployee"
+    [nzItemLayout]="'horizontal'"
+    [nzRenderItem]="item"
+  >
+    <ng-template #item let-item>
+      <nz-list-item
+      [nzActions]="[editAction, deleteAction]"
+      >
+      <ng-template #editAction>
+        <button nz-button nzType="primary" style="background-color: rgb(255, 238, 0); color: black;" (click)="actionClick(item)">
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+        </button>
+      </ng-template>
+      <ng-template #deleteAction>
+        <button nz-button nzType="danger" (click)="delete(item)">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </button>
+      </ng-template>
+      <nz-list-item-meta
+        [nzTitle]="nzTitle"
+        [nzDescription]="nzDescription"
+      >
+        <ng-template #nzTitle>
+          {{item?.username}}
+        </ng-template>
+        <ng-template #nzDescription>
+          <div>Name: {{item?.firstname}} {{ item?.lastname }}</div>
+          <div>Group: {{item?.group}}</div>
+        </ng-template>
+      </nz-list-item-meta>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+</div>
+

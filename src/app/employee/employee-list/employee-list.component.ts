@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
 import { employeeAttribute, employeeListRoute, pageNumbering } from 'src/app/helpers/shared-datas';
 import { StorageService } from 'src/app/utils/storages/storage.service';
+import { formatMedia, mediaMatch } from 'src/app/helpers/media';
 
 @Component({
   selector: 'app-employee-list',
@@ -24,7 +25,7 @@ export class EmployeeListComponent implements OnInit {
   sortValue: string | null = null;
   isDeleteEmp: boolean = false;
   selectDelete: any;
-  public innerWidth: any;
+  isMobile: boolean = false;
 
   constructor(
     private observerService: ObserversServiceService,
@@ -36,12 +37,7 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit() {
     this.observerService.setMenuTitle('Employee List');
     this.observerService.setBreadcrumb(this.listofBreadCrumbs);
-    this.innerWidth = window.innerWidth;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.isMobile = mediaMatch(formatMedia('max', 576));
   }
 
   ngAfterViewInit(){
@@ -50,6 +46,11 @@ export class EmployeeListComponent implements OnInit {
 
   ngAfterViewChecked() {
     this.cdr.detectChanges();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.isMobile = mediaMatch(formatMedia('max', 576));
   }
 
   getDataTable(){
