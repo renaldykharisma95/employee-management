@@ -1,4 +1,4 @@
-<nz-modal [(nzVisible)]="isLogOut" nzWrapClassName="vertical-center-modal" 
+<nz-modal [(nzVisible)]="isLogOut" nzWrapClassName="vertical-center-modal"
 nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <h2 class="confirmWording">{{nameUser}}, Are You Want to Logout?</h2>
 </nz-modal>
@@ -13,13 +13,15 @@ nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="ha
       </nz-header>
       <nz-content>
         <h2 class="menu-title">{{menuTitle}}</h2>
-        <nz-breadcrumb style="font-size: 18px;">
-          <nz-breadcrumb-item *ngFor="let item of breadCrumbData">
-            <a *ngIf="item.link !== ''" [routerLink]="item.link">{{ item.name }}</a>
-            <span *ngIf="breadCrumbData.length === 1" >/&nbsp;</span>
-            <span *ngIf="item.link === ''">{{ item.name }}</span>
-          </nz-breadcrumb-item>
-        </nz-breadcrumb>
+        <div *ngIf="isNotListPage">
+          <nz-breadcrumb style="font-size: 18px;">
+            <nz-breadcrumb-item *ngFor="let item of breadCrumbData">
+              <a *ngIf="item.link !== ''" [routerLink]="item.link">{{ item.name }}</a>
+              <span *ngIf="breadCrumbData.length === 1" >/&nbsp;</span>
+              <span *ngIf="item.link === ''">{{ item.name }}</span>
+            </nz-breadcrumb-item>
+          </nz-breadcrumb>
+        </div>
         <nz-content class="inner-content">
           <router-outlet></router-outlet>
         </nz-content>

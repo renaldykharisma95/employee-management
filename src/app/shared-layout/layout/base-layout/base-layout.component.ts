@@ -12,6 +12,7 @@ import { ObserversServiceService } from 'src/app/utils/observers/observers-servi
 export class BaseLayoutComponent implements OnInit {
 
   isCollapsed: boolean = false;
+  isNotListPage: boolean = false;
   menuTitle: string = '';
   breadCrumbData:any [] = [];
   nameUser: '';
@@ -32,6 +33,10 @@ export class BaseLayoutComponent implements OnInit {
     this.nameUser = getCookieData.userName;
     this.breadCrumbData = [];
     this.innerWidth = window.innerWidth;
+  }
+
+  ngDoCheck(){
+    this.isNotListPage = !(this.route.url === "/employee-list");
   }
 
   @HostListener('window:resize', ['$event'])

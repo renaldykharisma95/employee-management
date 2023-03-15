@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
-import { employeeAttribute, employeeListRoute, pageNumbering } from 'src/app/utils/shared-datas';
+import { employeeAttribute, employeeListRoute, pageNumbering } from 'src/app/helpers/shared-datas';
 import { StorageService } from 'src/app/utils/storages/storage.service';
 
 @Component({
@@ -62,7 +62,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   actionClick(data: any){
-    this.storageService.setStorageData(data, 1);
+    this.storageService.setStorageData(data);
     this.route.navigateByUrl('/employee-list/employee-actions');
   }
 
@@ -97,7 +97,7 @@ export class EmployeeListComponent implements OnInit {
     if(this.sortName && this.sortValue){
       this.listOfEmployee = data.sort((a: any, b: any) =>
         this.sortValue === 'ascend' ?
-        a[this.sortName] > b[this.sortName] ? 1 : -1 
+        a[this.sortName] > b[this.sortName] ? 1 : -1
         :
         b[this.sortName] > a[this.sortName] ? 1 : -1
       );
