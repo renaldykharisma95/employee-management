@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookiesService } from 'src/app/utils/cookies/cookies.service';
+import { EncryptService } from 'src/app/utils/encrypt-helper/encrypt.service';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
-import { StorageService } from 'src/app/utils/storages/storage.service';
 
 @Component({
   selector: 'app-base-layout',
@@ -9,7 +10,7 @@ import { StorageService } from 'src/app/utils/storages/storage.service';
   styleUrls: ['./base-layout.component.scss']
 })
 export class BaseLayoutComponent implements OnInit {
-  
+
   isCollapsed: boolean = false;
   menuTitle: string = '';
   breadCrumbData:any [] = [];
@@ -20,12 +21,15 @@ export class BaseLayoutComponent implements OnInit {
   constructor(
     private observerService: ObserversServiceService,
     private cdr: ChangeDetectorRef,
-    private localStorageService: StorageService,
+    private cookieService: CookiesService,
+    private encryptService: EncryptService,
     private route: Router
   ) { }
 
   ngOnInit() {
-    this.nameUser = JSON.parse(this.localStorageService.getDataStorage('USER_DATA')).userName;
+    const decryptResult = this.encryptService.decrypt(this.cookieService.getCookie());
+    const getCookieData =  JSON.parse(decryptResult);
+    this.nameUser = getCookieData.userName;
     this.breadCrumbData = [];
     this.innerWidth = window.innerWidth;
   }
@@ -34,7 +38,6 @@ export class BaseLayoutComponent implements OnInit {
   onResize(event) {
     this.innerWidth = window.innerWidth;
   }
-
 
   ngAfterViewInit(){
     this.observerService.titlePage.subscribe(name => {
@@ -56,10 +59,10 @@ export class BaseLayoutComponent implements OnInit {
   handleCancel(){
     this.isLogOut = false;
   }
-  
+
   handleOk(){
     this.observerService.setEmployeeData([], 4);
-    this.localStorageService.clearStorage(1);
+    this.cookieService.deleteCookie();
     this.route.navigate(['']);
     this.isLogOut = false;
   }
