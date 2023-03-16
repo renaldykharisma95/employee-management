@@ -2,7 +2,7 @@
 nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <h2 class="confirmWording">{{nameUser}}, Are You Want to Logout?</h2>
 </nz-modal>
-<nz-layout>
+<nz-layout style="height: 100vh; overflow: auto;">
     <nz-layout>
       <nz-header >
         <h2 class="header-title">Employee Management {{isMobile ? '' : 'Web Application'}}</h2>
@@ -11,7 +11,7 @@ nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="ha
           Logout
         </button>
       </nz-header>
-      <nz-content>
+      <nz-content class="outer-content">
         <h2 class="menu-title">{{menuTitle}}</h2>
         <div *ngIf="isNotListPage">
           <nz-breadcrumb style="font-size: 18px;">
@@ -26,6 +26,7 @@ nzClosable = "false" nzTitle="LogOut" (nzOnCancel)="handleCancel()" (nzOnOk)="ha
           <router-outlet></router-outlet>
         </nz-content>
       </nz-content>
-      <nz-footer>Employee Management Web Application ©2023 Implement By Renaldy Kharisma</nz-footer>
     </nz-layout>
 </nz-layout>
+<nz-footer>Employee Management Web Application ©2023 Implement By Renaldy Kharisma</nz-footer>
+
