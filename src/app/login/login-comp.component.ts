@@ -12,7 +12,7 @@ import { EncryptService } from '../utils/encrypt-helper/encrypt.service';
 export class LoginCompComponent implements OnInit {
 
   loginForm: FormGroup;
-  innerWidth: any;
+  innerWidth: number | string;
 
   constructor(
     private fb: FormBuilder,

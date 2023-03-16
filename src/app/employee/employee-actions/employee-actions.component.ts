@@ -6,6 +6,7 @@ import { Guid } from 'guid-typescript';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
 import { CURRENCY_MASK_IDR, employeeCreateRoute, employeeEditRoute, groupList, pageNumbering } from 'src/app/helpers/shared-datas';
 import { StorageService } from 'src/app/utils/storages/storage.service';
+import { IEmployee } from '../interfaces/employee-interface';
 
 @Component({
   selector: 'app-employee-actions',
@@ -15,13 +16,11 @@ import { StorageService } from 'src/app/utils/storages/storage.service';
 export class EmployeeActionsComponent implements OnInit {
   numberingPage = pageNumbering;
   employeeForm: FormGroup;
-  arrCollectData: any [] = [];
-  dataEmployee: any;
+  dataEmployee: IEmployee = null;
   listOfGroup = groupList;
   public idEmployee = Guid;
   currencyMask = CURRENCY_MASK_IDR;
-  amount: any;
-  innerWidth: any;
+  innerWidth: number | string;
 
   constructor(
     private observerService: ObserversServiceService,

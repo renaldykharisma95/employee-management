@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IEmployee } from 'src/app/employee/interfaces/employee-interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObserversServiceService {
 
-  arrCollectData:any [] = []
+  arrCollectData:IEmployee [] = []
 
   private titlepage = new BehaviorSubject('');
   titlePage = this.titlepage.asObservable();
@@ -24,7 +25,7 @@ export class ObserversServiceService {
   setBreadcrumb(name: any) {
     this.breadcrumb.next(name);
   }
- 
+
   setEmployeeData(data: any, type: number){
     switch(type){
       case 0:{

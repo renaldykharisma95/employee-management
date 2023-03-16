@@ -56,7 +56,7 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
       </thead>
       <tbody>
           <tr *ngFor="let data of employeeTable.data; index as i">
-              <td nzAlign="center">{{data?.numbering}}</td>
+              <td nzAlign="center">{{ i + 1 }}</td>
               <td nzAlign="center" nzWidth="200px">
                   <button nz-button nzType="primary" style="background-color: rgb(255, 238, 0); color: black;" (click)="actionClick(data)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>&nbsp;
                   <button nz-button nzType="danger" (click)="delete(data)"><i nz-icon nzType="delete" nzTheme="outline"></i></button>

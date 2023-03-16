@@ -13,6 +13,7 @@ import {
 } from "src/app/helpers/shared-datas";
 import { StorageService } from "src/app/utils/storages/storage.service";
 import { formatMedia, mediaMatch } from "src/app/helpers/media";
+import { IBreadcrumbs, IEmployee, ISearchAttributes } from "../interfaces/employee-interface";
 
 @Component({
   selector: "app-employee-list",
@@ -20,9 +21,9 @@ import { formatMedia, mediaMatch } from "src/app/helpers/media";
   styleUrls: ["./employee-list.component.scss"],
 })
 export class EmployeeListComponent implements OnInit {
-  listofBreadCrumbs: any[] = employeeListRoute;
-  numberingPage: any[] = pageNumbering;
-  listOfSearchAttribut: any[] = employeeAttribute;
+  listofBreadCrumbs: IBreadcrumbs[] = employeeListRoute;
+  numberingPage: string[] = pageNumbering;
+  listOfSearchAttribut: ISearchAttributes[] = employeeAttribute;
   selectSearch: string = "status";
   selectedPageNumber: string = "10";
   searchValue: string = null;
@@ -32,7 +33,7 @@ export class EmployeeListComponent implements OnInit {
   sortName: string | null = null;
   sortValue: string | null = null;
   isDeleteEmp: boolean = false;
-  selectDelete: any;
+  selectDelete: IEmployee;
   isMobile: boolean = false;
   isTablet: boolean = false;
 
@@ -48,7 +49,6 @@ export class EmployeeListComponent implements OnInit {
     this.observerService.setBreadcrumb(this.listofBreadCrumbs);
     this.isMobile = mediaMatch(formatMedia("max", 640));
     this.isTablet = mediaMatch(formatMedia("max", 1007));
-    console.log('this.isTablet: ', this.isTablet);
   }
 
   ngAfterViewInit() {
@@ -67,9 +67,6 @@ export class EmployeeListComponent implements OnInit {
 
   getDataTable() {
     this.observerService.employeedata.subscribe((data) => {
-      data.map((x: any, idx: number) => {
-        x.numbering = idx + 1;
-      });
       this.listOfEmployee = data;
     });
   }
@@ -85,13 +82,13 @@ export class EmployeeListComponent implements OnInit {
   }
 
   handleCancel() {
-    this.selectDelete = {};
+    this.selectDelete = {} as IEmployee;
     this.isDeleteEmp = false;
   }
 
   handleOk() {
     this.observerService.setEmployeeData(this.selectDelete, 2);
-    this.selectDelete = {};
+    this.selectDelete = {} as IEmployee;
     this.isDeleteEmp = false;
   }
 
