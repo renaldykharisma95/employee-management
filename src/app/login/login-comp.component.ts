@@ -1,7 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StorageService } from '../utils/storages/storage.service';
+import { CookiesService } from '../utils/cookies/cookies.service';
+import { EncryptService } from '../utils/encrypt-helper/encrypt.service';
 
 @Component({
   selector: 'app-login-comp',
@@ -11,12 +12,13 @@ import { StorageService } from '../utils/storages/storage.service';
 export class LoginCompComponent implements OnInit {
 
   loginForm: FormGroup;
-  innerWidth: any;
+  innerWidth: number | string;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private storageService: StorageService
+    private cookieService: CookiesService,
+    private encryptService: EncryptService,
     ) { }
 
   ngOnInit() {
@@ -25,15 +27,15 @@ export class LoginCompComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.innerWidth = window.innerWidth;
   }
 
   setForm(){
     this.loginForm = this.fb.group({
-      userName: new FormControl(null, Validators.required),
+      userName: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required)
-    })
+    });
   }
 
   submitForm(): void {
@@ -48,9 +50,10 @@ export class LoginCompComponent implements OnInit {
   loginSubmit(){
     this.submitForm();
     if(this.loginForm.valid){
-      this.storageService.setStorageData({...this.loginForm.value}, 0)
+      const loginValue = JSON.stringify({...this.loginForm.value});
+      const encryptResult = this.encryptService.encrypt(loginValue);
+      this.cookieService.setCookie(encryptResult, 1);
       this.router.navigate(['/employee-list']);
     }
   }
-
 }

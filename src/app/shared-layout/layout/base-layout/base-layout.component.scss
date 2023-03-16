@@ -17,25 +17,24 @@
   }
 
   nz-header {
-    background-color: #0d3b70; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
+    background-color: #0d3b70;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 24px;
-  }
-
-  nz-content {
-    margin: 0 16px;
   }
 
   nz-breadcrumb {
     margin: 16px 16px;
   }
 
+  .outer-content{
+    margin: 0 16px;
+  }
+
   .inner-content {
     padding: 42px;
     background: #fff;
-    min-height: 100vh;
   }
 
   .menu-title{
@@ -66,8 +65,8 @@
     font-size: 20px;
     text-align: center;
   }
-  
-  @media screen and (max-width: 600px){
+
+  @media screen and (max-width: 640px){
     .header-title{
       color: white;
       font-size: 18px;
@@ -84,9 +83,12 @@
       font-size: 12px;
     }
 
+    .outer-content{
+      margin: 0 16px;
+    }
+
     .inner-content {
       padding: 6px;
       background: #fff;
-      min-height: 100vh;
     }
   }

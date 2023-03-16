@@ -1,12 +1,12 @@
 <div class="background">
     <nz-card class="card">
-        <h2 style="text-align: center;">Employee Management Web Application</h2>
+        <h2 style="text-align: center;">Employee Management Application</h2>
         <div class="card-form">
             <form nz-form [formGroup]="loginForm">
                 <nz-form-item>
                     <nz-form-label class="label" [nzSm]="6" [nzXs]="2" nzRequired nzFor="username" nzNoColon="true">Username</nz-form-label>
                     <nz-form-label *ngIf="innerWidth > 600" [nzSm]="1" [nzXs]="1"  nzNoColon="true">:</nz-form-label>
-                    <nz-form-control [nzSm]="17" [nzXs]="8" nzErrorTip="Please input your username!">
+                    <nz-form-control [nzSm]="17" [nzXs]="8" nzErrorTip="Username Cannot be Empty or Not use Email Format!">
                         <input formControlName="userName" nz-input placeholder="Username" />
                     </nz-form-control>
                 </nz-form-item>

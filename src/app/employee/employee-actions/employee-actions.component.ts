@@ -4,24 +4,23 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ObserversServiceService } from 'src/app/utils/observers/observers-service.service';
-import { CURRENCY_MASK_IDR, employeeCreateRoute, employeeEditRoute, groupList, pageNumbering } from 'src/app/utils/shared-datas';
+import { CURRENCY_MASK_IDR, employeeCreateRoute, employeeEditRoute, groupList, pageNumbering } from 'src/app/helpers/shared-datas';
 import { StorageService } from 'src/app/utils/storages/storage.service';
+import { IEmployee } from '../interfaces/employee-interface';
 
 @Component({
   selector: 'app-employee-actions',
   templateUrl: './employee-actions.component.html',
   styleUrls: ['./employee-actions.component.scss']
 })
-export class EmployeeActionsComponent implements OnInit {  
+export class EmployeeActionsComponent implements OnInit {
   numberingPage = pageNumbering;
   employeeForm: FormGroup;
-  arrCollectData: any [] = [];
-  dataEmployee: any;
+  dataEmployee: IEmployee = null;
   listOfGroup = groupList;
   public idEmployee = Guid;
   currencyMask = CURRENCY_MASK_IDR;
-  amount: any;
-  innerWidth: any;
+  innerWidth: number | string;
 
   constructor(
     private observerService: ObserversServiceService,
@@ -49,10 +48,10 @@ export class EmployeeActionsComponent implements OnInit {
 
   setForm(){
     this.employeeForm = this.fb.group({
-      username: new FormControl(null, Validators.required),
+      username: new FormControl(null, [Validators.required, Validators.email]),
       firstname: new FormControl(null, Validators.required),
       lastname: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       birthdate: new FormControl(null, Validators.required),
       basicSalary: new FormControl(null, Validators.required),
       status: new FormControl(null, Validators.required),
@@ -87,7 +86,7 @@ export class EmployeeActionsComponent implements OnInit {
       case 1:{
         this.submitForm();
         if(this.employeeForm.valid){
-          this.observerService.setEmployeeData({id: this.dataEmployee ? this.dataEmployee.id :String(Guid.create()), ...this.employeeForm.value}, 
+          this.observerService.setEmployeeData({id: this.dataEmployee ? this.dataEmployee.id :String(Guid.create()), ...this.employeeForm.value},
           !this.dataEmployee ? 0 : 1);
           this.storageService.clearStorage(0);
           this.route.navigate(['/employee-list']);
