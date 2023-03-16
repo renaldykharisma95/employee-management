@@ -74,27 +74,27 @@ export const groupList = [
 
 export const employeeAttribute=[
     {
-        id: '1',
+        id: 'status',
         name: 'Status'
     },
     {
-        id: '2',
+        id: 'username',
         name: 'Username'
     },
     {
-        id: '3',
+        id: 'firstname',
         name: 'First Name'
     },
     {
-        id: '4',
+        id: 'lastname',
         name: 'Last Name'
     },
     {
-        id: '5',
+        id: 'email',
         name: 'Email'
     },
     {
-        id: '6',
+        id: 'group',
         name: 'Group'
     }
 ];

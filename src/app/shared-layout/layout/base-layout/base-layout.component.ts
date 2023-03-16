@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { formatMedia, mediaMatch } from 'src/app/helpers/media';
 import { CookiesService } from 'src/app/utils/cookies/cookies.service';
@@ -22,7 +22,6 @@ export class BaseLayoutComponent implements OnInit {
 
   constructor(
     private observerService: ObserversServiceService,
-    private cdr: ChangeDetectorRef,
     private cookieService: CookiesService,
     private encryptService: EncryptService,
     private route: Router,
@@ -34,13 +33,12 @@ export class BaseLayoutComponent implements OnInit {
     const getCookieData =  JSON.parse(decryptResult);
     this.nameUser = getCookieData.userName;
     this.breadCrumbData = [];
-    this.isMobile = mediaMatch(formatMedia('max', 576))
+    this.isMobile = mediaMatch(formatMedia('max', 640))
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.isMobile = mediaMatch(formatMedia('max', 576));
-    console.log('this.isMobile: ', this.isMobile);
+    this.isMobile = mediaMatch(formatMedia('max', 640));
   }
 
   ngDoCheck(){
@@ -54,10 +52,6 @@ export class BaseLayoutComponent implements OnInit {
     this.observerService.breadCrumb.subscribe(breadcrumb => {
       this.breadCrumbData = breadcrumb;
     });
-  }
-
-  ngAfterViewChecked() {
-    this.cdr.detectChanges();
   }
 
   signOut(){

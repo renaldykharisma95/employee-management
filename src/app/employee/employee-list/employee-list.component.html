@@ -23,13 +23,7 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
   <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
 </div>
 <div *ngIf="isMobile">
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <div style="display: flex; align-items: center;">
-            <span>Page Size:</span>&nbsp;&nbsp;
-            <nz-select [(ngModel)]="selectedPageNumber" (ngModelChange)="onPageNumberChange($event)">
-                <nz-option *ngFor="let item of numberingPage" [nzValue]="item" [nzLabel]="item"></nz-option>
-            </nz-select>
-        </div>
+    <div style="display: flex; align-items: center; justify-content: end;">
         <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
     </div>
     <br />
