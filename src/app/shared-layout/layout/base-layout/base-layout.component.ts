@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { formatMedia, mediaMatch } from 'src/app/helpers/media';
 import { CookiesService } from 'src/app/utils/cookies/cookies.service';
@@ -22,6 +22,7 @@ export class BaseLayoutComponent implements OnInit {
 
   constructor(
     private observerService: ObserversServiceService,
+    private cdr: ChangeDetectorRef,
     private cookieService: CookiesService,
     private encryptService: EncryptService,
     private route: Router,
@@ -52,6 +53,10 @@ export class BaseLayoutComponent implements OnInit {
     this.observerService.breadCrumb.subscribe(breadcrumb => {
       this.breadCrumbData = breadcrumb;
     });
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
   }
 
   signOut(){

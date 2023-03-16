@@ -2,7 +2,7 @@
 nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
     <h2 style="text-align: center;">Are You Sure Want to Delete?</h2>
 </nz-modal>
-<div class="header-actions" *ngIf="!isMobile">
+<div class="header-actions" *ngIf="!isMobile && !isTablet">
   <div class="page-numbering">
       <div style="display: flex; align-items: center;">
           <span>Page Size:</span>&nbsp;&nbsp;
@@ -22,7 +22,7 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
   </div>
   <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
 </div>
-<div *ngIf="isMobile">
+<div *ngIf="isMobile || isTablet">
     <div style="display: flex; align-items: center; justify-content: end;">
         <button nz-button nzType="primary" (click)="actionClick(null)">Add Employee</button>
     </div>
@@ -38,7 +38,7 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
     <button nz-button nzType="primary" style="margin-top: 6px;" (click)="searchEmployee()" nzBlock>Search</button>
 </div>
 <br />
-<div *ngIf="!isMobile">
+<div *ngIf="!isMobile && !isTablet">
   <nz-table #employeeTable [nzData]="listOfEmployee"
   [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="listOfEmployee.length" [nzScroll]="{x: '1200px'}">
       <thead (nzSortChange)="sort($event)" nzSingleSort>
@@ -72,7 +72,7 @@ nzClosable = "false" nzTitle="Delete Employee" (nzOnCancel)="handleCancel()" (nz
       </tbody>
   </nz-table>
 </div>
-<div *ngIf="isMobile">
+<div *ngIf="isMobile || isTablet">
   <nz-list
     [nzDataSource]="listOfEmployee"
     [nzItemLayout]="'horizontal'"

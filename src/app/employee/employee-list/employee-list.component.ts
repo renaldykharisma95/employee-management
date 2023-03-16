@@ -34,6 +34,7 @@ export class EmployeeListComponent implements OnInit {
   isDeleteEmp: boolean = false;
   selectDelete: any;
   isMobile: boolean = false;
+  isTablet: boolean = false;
 
   constructor(
     private observerService: ObserversServiceService,
@@ -46,6 +47,8 @@ export class EmployeeListComponent implements OnInit {
     this.observerService.setMenuTitle("Employee List");
     this.observerService.setBreadcrumb(this.listofBreadCrumbs);
     this.isMobile = mediaMatch(formatMedia("max", 640));
+    this.isTablet = mediaMatch(formatMedia("max", 1007));
+    console.log('this.isTablet: ', this.isTablet);
   }
 
   ngAfterViewInit() {
@@ -59,6 +62,7 @@ export class EmployeeListComponent implements OnInit {
   @HostListener("window:resize", ["$event"])
   onResize(event) {
     this.isMobile = mediaMatch(formatMedia("max", 640));
+    this.isTablet = mediaMatch(formatMedia("max", 1007));
   }
 
   getDataTable() {
